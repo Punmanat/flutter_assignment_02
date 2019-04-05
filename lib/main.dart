@@ -9,13 +9,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter_Assignment_02',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
       initialRoute: "/",
-      routes: {'/': (context) => Todo(), "/new": (context) => NewSubject()},
+      routes: {
+        '/': (context) => TodoScreen(),
+        "/new": (context) => NewSubject()
+      },
     );
   }
 }

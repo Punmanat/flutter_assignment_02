@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../model/todo.dart';
 
 class Task extends StatefulWidget {
   @override
@@ -8,6 +9,26 @@ class Task extends StatefulWidget {
 }
 
 class TaskState extends State<Task> {
+  TodoProvider todo = TodoProvider();
+
+  List<Todo> _notToDones = List();
+  @override
+  void initState() {
+    super.initState();
+    todo.open().then((r) {
+      print("Success");
+      getNotDones();
+    });
+  }
+
+  void getNotDones() {
+    todo.getNotDones().then((r) {
+      setState(() {
+        _notToDones = r;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +43,23 @@ class TaskState extends State<Task> {
           )
         ],
       ),
-      body: Center(child: Text("No data found..")),
+      body: _notToDones.length == 0
+          ? Center(child: Text('No data found...'))
+          : ListView(
+              children: _notToDones.map((todoItem) {
+                return CheckboxListTile(
+                  title: Text(todoItem.title),
+                  value: todoItem.done,
+                  onChanged: (bool value) {
+                    setState(() {
+                      todoItem.done = value;
+                      todo.setTodoDone(todoItem);
+                      getNotDones();
+                    });
+                  },
+                );
+              }).toList(),
+            ),
     );
   }
 }
