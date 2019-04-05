@@ -34,7 +34,7 @@ class NewSubjectState extends State<NewSubject> {
                 controller: subject,
                 decoration: InputDecoration(hintText: "Subject"),
                 validator: (value) {
-                  if (value.isEmpty) return "Subject is required";
+                  if (value.isEmpty) return "Please fill subject";
                 },
               ),
               Row(
