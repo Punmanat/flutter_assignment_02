@@ -16,7 +16,6 @@ class TaskState extends State<Task> {
   void initState() {
     super.initState();
     todo.open().then((r) {
-      print("Success");
       getNotDones();
     });
   }
@@ -33,6 +32,7 @@ class TaskState extends State<Task> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Todo"),
         actions: <Widget>[
           IconButton(

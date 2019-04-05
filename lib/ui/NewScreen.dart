@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../model/todo.dart';
+import 'TaskScreen.dart';
 
 class NewSubject extends StatefulWidget {
   @override
@@ -46,7 +47,7 @@ class NewSubjectState extends State<NewSubject> {
                         if (_formkey.currentState.validate()) {
                           Todo data = Todo(title: subject.text);
                           todo.insert(data).then((r) {
-                            Navigator.pushReplacementNamed(context, '/');
+                            Navigator.pushReplacementNamed(context, "/");
                           });
                         }
                       },
